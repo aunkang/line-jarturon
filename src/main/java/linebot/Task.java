@@ -1,8 +1,9 @@
 package linebot;
 
+import java.util.Comparator;
 import java.util.Date;
 
-public class Task {
+public class Task implements Comparable<Task> {
 	private String date;
 	private String time;
 	private String name;
@@ -39,5 +40,33 @@ public class Task {
 	public void setDuedate(Date duedate) {
 		this.duedate = duedate;
 	}
+
+	@Override
+	public int compareTo(Task compareFruit) {
+
+		// ascending order
+		return this.getDuedate().compareTo(compareFruit.getDuedate());
+
+		// descending order
+		// return compareQuantity - this.quantity;
+
+	}
+
+	public static Comparator<Task> DueDateComparator = new Comparator<Task>() {
+
+		public int compare(Task fruit1, Task fruit2) {
+
+			if (fruit1.getDuedate() == null || fruit2.getDuedate() == null) {
+				return 0;
+			}
+
+			// ascending order
+			return fruit1.getDuedate().compareTo(fruit2.getDuedate());
+
+			// descending order
+			// return fruitName2.compareTo(fruitName1);
+		}
+
+	};
 
 }

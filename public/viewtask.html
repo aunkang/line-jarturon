@@ -8,17 +8,20 @@
   </head>
   <body onload="initialize()">
   
-	<div class="container"></div>
+	<table style="border: 1px solid black;width: 100%;" class="container"></table>
 	
 	<div class="error"></div>
   
   
   <script> 
   
+  let userID = ''
+  
   function initialize() {
     liff.init((data) => {
 	    liff.getProfile()
 	    .then( ({ userId }) => {
+	    	userID = userId
     		fetch(userId)
     	})
 	})
@@ -27,28 +30,42 @@
   function fetch(userId) {
 	  document.getElementsByClassName('error')[0].innerHTML = ''
 	  document.getElementsByClassName('error')[0].innerHTML =+ 'fetch'
-  fetch('https://line-jarturon.herokuapp.com/getTask?userId='+userId)
-  .then((response) => {
-	document.getElementsByClassName('error')[0].innerHTML =+ JSON.stringify(response)
-	document.getElementsByClassName('error')[0].innerHTML =+ JSON.stringify(response.json())
-    return response.json();
-  }).then((myJson) => {
-	document.getElementsByClassName('error')[0].innerHTML += JSON.stringify(myJson)
-  	document.getElementsByClassName('error')[0].innerHTML += '<br />'
-    for (let row of myJson) {
-		let node = document.createElement("div");
-		node.innerHTML = row['name']
-		document.getElementsByClassName('container')[0].appendChild(node)
-		document.getElementsByClassName('container')[0].innerHTML += '<br />'
-	}
-  }).catch(error => {
-	    document.getElementByClassNames('error')[0].innerHTML += "error"
-		document.getElementByClassNames('error')[0].innerHTML += JSON.stringify(error)
-		document.getElementsByClassName('error')[0].innerHTML += '<br />'
-  });
-  
-  
+  	  fetch('https://line-jarturon.herokuapp.com/getTask?userId='+userId)
+  	  .then((response) => {
+		
+	    return response.json();
+	  }).then((myJson) => {
+
+	    for (let each of myJson) {
+			const table = document.getElementsByClassName('container')[0]
+			const row = table.insertRow(0);
+			const checkbok = row.insertCell(0);
+			const name = row.insertCell(0);
+			const date = row.insertCell(1);
+			const time = row.insertCell(2);
+			checkbok.innerHTML = `<input type='checkbox' id='${each.name}'>`;
+			name.innerHTML = each.name;
+	        date.innerHTML = each.date;
+	        time.innerHTML = each.time;
+		}
+	  }).catch(error => {
+		    console.log(error)
+			document.getElementsByClassName('error')[0].innerHTML += JSON.stringify(error)
+	  });
   }
+  
+  function onSubmit() {
+	  const allSelectedItem = document.querySelectorAll("input[type=checkbox]:checked")
+	  let allSelectedID = []
+	  for (const each of allSelectedItem) {
+		  allSelectedID.push(each.id)
+	  }
+	  document.getElementsByClassName('error')[0].innerHTML += JSON.stringify(allSelectedID[0])
+	  fetch('https://line-jarturon.herokuapp.com/removeTask/'+ userID, {
+	        method: "DELETE", 
+	        headers: { "Content-Type": "application/json" }
+	        body: JSON.stringify(allSelectedID)
+  	  }).then(response => response.json())
   
   
   

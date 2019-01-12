@@ -20,7 +20,11 @@
   <script> 
   
   initialize() {
+	  document.getElementsByClassName('error')[0].appendChild("iniitil")
+  	  document.getElementsByClassName('error')[0].appendChild('<br />')
     liff.init((data) => {
+    	document.getElementsByClassName('error')[0].appendChild("init")
+    	document.getElementsByClassName('error')[0].appendChild('<br />')
 	    liff.getProfile(({ userId }) => {
 	    	document.getElementsByClassName('error')[0].appendChild(userId)
 	    	document.getElementsByClassName('error')[0].appendChild('<br />')

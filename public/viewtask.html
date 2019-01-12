@@ -13,14 +13,18 @@
   <body onload="initialize()">
   
 	<div class="container"></div>
+	
+	<div class="error"></div>
   
   
   <script> 
   
   initialize() {
     liff.init((data) => {
-	    liff.getProfile(profile => {
-    		fetch(profile['userId'])
+	    liff.getProfile(({ userId }) => {
+	    	document.getElementsByClassName('error')[0].appendChild(userId)
+	    	document.getElementsByClassName('error')[0].appendChild('<br />')
+    		fetch(userId)
     	})
 	});
   }
@@ -36,9 +40,14 @@
     for (let row of myJson) {
 		let node = document.createElement("div");
 		node.innerHTML = row['name']
-		document.getElementByClassNames('container').appendChild(node)
-		document.getElementByClassNames('container').appendChild('<br />')
+		document.getElementsByClassName('container')[0].appendChild(node)
+		document.getElementsByClassName('container')[0].appendChild('<br />')
 	}
+  }).catch(error => {
+	    let node = document.createElement("div");
+		node.innerHTML = error
+		document.getElementByClassNames('error')[0].appendChild(node)
+		document.getElementsByClassName('error')[0].appendChild('<br />')
   });
   
   

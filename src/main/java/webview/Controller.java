@@ -10,7 +10,9 @@ public class Controller {
 	@GetMapping("/webview")
 	public ModelAndView getTasks() {
 		ModelAndView mav = new ModelAndView("viewtask.html");
-		System.out.println("controller");
+		System.err.println("Hello, controller!");
+		System.out.println("Hello, controller!");
+		
 		return mav;
 	}
 	

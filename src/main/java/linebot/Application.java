@@ -47,7 +47,10 @@ public class Application {
 		task.setDate(dateStr);
 		task.setTime(hhStr + mmStr);
 		task.setDuedate(dueDate);
-		System.out.println("application");
+		
+		System.err.println("Hello, application!");
+		System.out.println("Hello, application!");
+		
 		this.saveTask(userId, task);
 		
 		return new TextMessage("Your task has been added" + "    \n\n" + "Name: " + taskStr + "    \n" + "Date: " + dueDate

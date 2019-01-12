@@ -1,4 +1,4 @@
 line.bot:
-  channel-token: 'Put Your Channel Token Here.'
-  channel-secret: 'Put Your Channel Secret Here.'
+  channel-token: 'MRbY8X/6fwCCjBucg7m8a38BcVHVWiF55uHowWHHj8p7JB4Ns/w/0uBhTiftdmdpdFNoOaR2UtAM/gBKWSCSoOZD6ImXhD1KkZIeiCkoDf4cLNbeWnBbsSDJNn418Op3Ey+/qw2ZOWB5wWWMiUJ71gdB04t89/1O/w1cDnyilFU='
+  channel-secret: 'a974cbef56425d0057c10440b7cb6c03'
   handler.path: /callback

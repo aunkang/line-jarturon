@@ -23,7 +23,7 @@ import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 @SpringBootApplication
 @LineMessageHandler
 public class Application {
-	private Map<String, List<Task>> maps = new HashMap<String, List<Task>>();
+	public static Map<String, List<Task>> maps = new HashMap<String, List<Task>>();
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);

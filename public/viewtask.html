@@ -21,14 +21,12 @@
     liff.init((data) => {
     	document.getElementsByClassName('error')[0].innerHTML += 'init'
     	document.getElementsByClassName('error')[0].innerHTML += '<br />'
-	    liff.getProfile(({ userId }) => {
+	    liff.getProfile()
+	    .then( ({ userId }) => {
 	    	document.getElementsByClassName('error')[0].innerHTML += userId
 	    	document.getElementsByClassName('error')[0].innerHTML += '<br />'
     		fetch(userId)
     	})
-	}).catch(error => {
-		document.getElementsByClassName('error')[0].innerHTML += error
-		document.getElementsByClassName('error')[0].innerHTML += '<br />'
 	})
   }
   

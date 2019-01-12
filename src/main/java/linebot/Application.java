@@ -1,4 +1,3 @@
-
 package linebot;
 
 import java.text.SimpleDateFormat;
@@ -51,10 +50,6 @@ public class Application {
 
 		this.saveTask(userId, task);
 		
-		
-		
-		
-
 		return new TextMessage("Your task has been added" + "    \n\n" + "Name: " + taskStr + "    \n" + "Date: " + dueDate
 				+ "    \n" + "HH:mm : " + hhStr + ":" + mmStr + "\n\n See all task click link below. \n line://app/1613138841-EqAkLo6L");
 	}

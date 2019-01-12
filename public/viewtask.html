@@ -67,7 +67,7 @@
 	  document.getElementsByClassName('error')[0].innerHTML += JSON.stringify(allSelectedID[0])
 	  fetch('https://line-jarturon.herokuapp.com/removeTask/'+ userID, {
 	        method: "DELETE", 
-	        headers: { "Content-Type": "application/json" }
+	        headers: { "Content-Type": "application/json" },
 	        body: JSON.stringify(allSelectedID)
   	  }).then(response => response.json())
   

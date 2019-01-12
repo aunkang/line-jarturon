@@ -6,7 +6,7 @@
     
     <title>App</title>
   </head>
-  <body onload="initialize()">
+  <body onload="initialize();">
   
 	<table style="border: 1px solid black;width: 100%;" class="container">
 		<tr style="text-align: center;"><td style="border: 1px solid black;"></td><td style="border: 1px solid black;">Name</td><td style="border: 1px solid black;">Date</td><td style="border: 1px solid black;">Time</td></tr>
@@ -69,7 +69,7 @@
 	        headers: { "Content-Type": "application/json" },
 	        body: JSON.stringify(allSelectedID)
   	  }).then(response => response.json());
-  
+  }
   
   
   </script>

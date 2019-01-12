@@ -1,6 +1,5 @@
 package linebot;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,18 +40,22 @@ public class Application {
 		String hhStr = inputs[2].trim();
 		String mmStr = inputs[3].trim();
 
-		Date date = this.createDuedate(dateStr, hhStr, mmStr);
+		Date dueDate = this.createDuedate(dateStr, hhStr, mmStr);
 
 		Task task = new Task();
 		task.setName(taskStr);
 		task.setDate(dateStr);
 		task.setTime(hhStr + mmStr);
-		task.setDuedate(date);
+		task.setDuedate(dueDate);
 
 		this.saveTask(userId, task);
+		
+		
+		
+		
 
-		return new TextMessage("Your task has been added" + "    \n\n" + "Name: " + taskStr + "    \n" + "Date: " + date
-				+ "    \n" + "HH:mm : " + hhStr + ":" + mmStr);
+		return new TextMessage("Your task has been added" + "    \n\n" + "Name: " + taskStr + "    \n" + "Date: " + dueDate
+				+ "    \n" + "HH:mm : " + hhStr + ":" + mmStr + "\n\n See all task click link below. \n line://app/1613138841-EqAkLo6L");
 	}
 
 	private String getMessage(MessageEvent<TextMessageContent> e) {

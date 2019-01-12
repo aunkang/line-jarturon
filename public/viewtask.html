@@ -19,16 +19,16 @@
   
   initialize() {
     liff.init((data) => {
-	fetch()
-
-	
+	    liff.getProfile(profile => {
+    		fetch(profile['userId'])
+    	})
 	});
   }
   
-  fetch() {
+  fetch(userId) {
   
   
-  fetch('https://line-jarturon.herokuapp.com/getTask')
+  fetch('https://line-jarturon.herokuapp.com/getTask?userId='+userId)
   .then(function(response) {
     return response.json();
   })

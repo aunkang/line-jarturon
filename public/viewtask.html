@@ -25,13 +25,14 @@
   }
   
   function fetch(userId) {
+	  document.getElementsByClassName('error')[0].innerHTML = ''
 	  document.getElementsByClassName('error')[0].innerHTML =+ 'fetch'
   fetch('https://line-jarturon.herokuapp.com/getTask?userId='+userId)
-  .then(function(response) {
+  .then((response) => {
 	document.getElementsByClassName('error')[0].innerHTML =+ JSON.stringify(response)
 	document.getElementsByClassName('error')[0].innerHTML =+ JSON.stringify(response.json())
     return response.json();
-  }).then(function(myJson) {
+  }).then((myJson) => {
 	document.getElementsByClassName('error')[0].innerHTML += JSON.stringify(myJson)
   	document.getElementsByClassName('error')[0].innerHTML += '<br />'
     for (let row of myJson) {

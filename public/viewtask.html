@@ -16,15 +16,9 @@
   <script> 
   
   function initialize() {
-	  document.getElementsByClassName('error')[0].innerHTML += 'initial'
-  	  document.getElementsByClassName('error')[0].innerHTML += '<br />'
     liff.init((data) => {
-    	document.getElementsByClassName('error')[0].innerHTML += 'init'
-    	document.getElementsByClassName('error')[0].innerHTML += '<br />'
 	    liff.getProfile()
 	    .then( ({ userId }) => {
-	    	document.getElementsByClassName('error')[0].innerHTML += userId
-	    	document.getElementsByClassName('error')[0].innerHTML += '<br />'
     		fetch(userId)
     	})
 	})
@@ -34,6 +28,8 @@
   
   fetch('https://line-jarturon.herokuapp.com/getTask?userId='+userId)
   .then(function(response) {
+	document.getElementsByClassName('error')[0].innerHTML =+ JSON.stringify(response)
+	document.getElementsByClassName('error')[0].innerHTML =+ JSON.stringify(response.json())
     return response.json();
   }).then(function(myJson) {
 	document.getElementsByClassName('error')[0].innerHTML += JSON.stringify(myJson)
@@ -45,7 +41,7 @@
 		document.getElementsByClassName('container')[0].innerHTML += '<br />'
 	}
   }).catch(error => {
-	    document.getElementByClassNames('error')[0].innerHTML += JSON.stringify("error")
+	    document.getElementByClassNames('error')[0].innerHTML += "error"
 		document.getElementByClassNames('error')[0].innerHTML += JSON.stringify(error)
 		document.getElementsByClassName('error')[0].innerHTML += '<br />'
   });

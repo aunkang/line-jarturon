@@ -1,0 +1,55 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script> <---- add script here
+    
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+
+    <title>App</title>
+  </head>
+  <body onload="initialize()">
+  
+	<div class="container"></div>
+  
+  
+  <script> 
+  
+  initialize() {
+    liff.init((data) => {
+	fetch()
+
+	
+	});
+  }
+  
+  fetch() {
+  
+  
+  fetch('https://line-jarturon.herokuapp.com/getTask')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    for (let row of myJson) {
+		let node = document.createElement("div");
+		node.innerHTML = row['name']
+		document.getElementByClassNames('container').appendChild(node)
+		document.getElementByClassNames('container').appendChild('<br />')
+	}
+  });
+  
+  
+  }
+  
+  
+  
+  </script>
+  
+  
+  
+  </body>
+  
+  </html>

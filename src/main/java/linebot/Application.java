@@ -73,6 +73,6 @@ public class Application {
 		task.setDuedate(date);
 
 		return new TextMessage(
-				message.getText() + "    \n" + "name: " + taskStr + "    \n" + "Date: " + dateStr + "    \n" + "HH:mm : " + hhStr+mmStr);
+				message.getText() + "    \n\n" + "Name: " + taskStr + "    \n" + "Date: " + date + "    \n" + "HH:mm : " + hhStr+":"+mmStr);
 	}
 }

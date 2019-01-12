@@ -8,7 +8,7 @@
   </head>
   <body onload="initialize();">
   
-	<table style="border: 1px solid black;width: 100%;" class="container">
+	<table style="border: 1px solid black;width: 60%;margin: 0 auto;" class="container">
 		<tr style="text-align: center;"><td style="border: 1px solid black;"></td><td style="border: 1px solid black;">Name</td><td style="border: 1px solid black;">Date</td><td style="border: 1px solid black;">Time</td></tr>
 	</table>
 	
@@ -33,8 +33,6 @@
   }
   
   function fetchData(userId) {
-	  document.getElementsByClassName('error')[0].innerHTML = ''
-	  document.getElementsByClassName('error')[0].innerHTML =+ 'fetch'
   	  fetch('https://line-jarturon.herokuapp.com/getTask?userId='+userId)
   	  .then((response) => {
 		
@@ -53,7 +51,6 @@
 		}
 	  }).catch(error => {
 		    console.log(error)
-			document.getElementsByClassName('error')[0].innerHTML += JSON.stringify(error)
 	  });
   }
   

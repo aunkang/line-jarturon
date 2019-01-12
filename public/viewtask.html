@@ -16,17 +16,20 @@
   <script> 
   
   function initialize() {
-	  document.getElementsByClassName('error')[0].innerHTML = 'initial'
-  	  document.getElementsByClassName('error')[0].appendChild('<br />')
+	  document.getElementsByClassName('error')[0].innerHTML += 'initial'
+  	  document.getElementsByClassName('error')[0].innerHTML += '<br />'
     liff.init((data) => {
-    	document.getElementsByClassName('error')[0].innerHTML = 'init'
-    	document.getElementsByClassName('error')[0].appendChild('<br />')
+    	document.getElementsByClassName('error')[0].innerHTML += 'init'
+    	document.getElementsByClassName('error')[0].innerHTML += '<br />'
 	    liff.getProfile(({ userId }) => {
-	    	document.getElementsByClassName('error')[0].innerHTML = userId
-	    	document.getElementsByClassName('error')[0].appendChild('<br />')
+	    	document.getElementsByClassName('error')[0].innerHTML += userId
+	    	document.getElementsByClassName('error')[0].innerHTML += '<br />'
     		fetch(userId)
     	})
-	});
+	}).catch(error => {
+		document.getElementsByClassName('error')[0].innerHTML += error
+		document.getElementsByClassName('error')[0].innerHTML += '<br />'
+	})
   }
   
   function fetch(userId) {
@@ -41,11 +44,11 @@
 		let node = document.createElement("div");
 		node.innerHTML = row['name']
 		document.getElementsByClassName('container')[0].appendChild(node)
-		document.getElementsByClassName('container')[0].appendChild('<br />')
+		document.getElementsByClassName('container')[0].innerHTML += '<br />'
 	}
   }).catch(error => {
-		document.getElementByClassNames('error')[0].innerHTML = node
-		document.getElementsByClassName('error')[0].appendChild('<br />')
+		document.getElementByClassNames('error')[0].innerHTML += node
+		document.getElementsByClassName('error')[0].innerHTML += '<br />'
   });
   
   

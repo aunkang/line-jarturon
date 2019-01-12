@@ -1,13 +1,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script> <---- add script here
+    <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
     
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-
     <title>App</title>
   </head>
   <body onload="initialize()">
@@ -19,7 +15,7 @@
   
   <script> 
   
-  initialize() {
+  function initialize() {
 	  document.getElementsByClassName('error')[0].appendChild("iniitil")
   	  document.getElementsByClassName('error')[0].appendChild('<br />')
     liff.init((data) => {
@@ -33,7 +29,7 @@
 	});
   }
   
-  fetch(userId) {
+  function fetch(userId) {
   
   
   fetch('https://line-jarturon.herokuapp.com/getTask?userId='+userId)

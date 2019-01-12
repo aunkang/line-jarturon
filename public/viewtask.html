@@ -8,7 +8,10 @@
   </head>
   <body onload="initialize()">
   
-	<table style="border: 1px solid black;width: 100%;" class="container"></table>
+	<table style="border: 1px solid black;width: 100%;" class="container">
+		<tr style="text-align: center;"><td style="border: 1px solid black;"></td><td style="border: 1px solid black;">Name</td><td style="border: 1px solid black;">Date</td><td style="border: 1px solid black;">Time</td></tr>
+	</table>
+	
 	
 	<div class="error"></div>
 	
@@ -29,7 +32,7 @@
 	})
   }
   
-  function fetch(userId) {
+  function fetchData(userId) {
 	  document.getElementsByClassName('error')[0].innerHTML = ''
 	  document.getElementsByClassName('error')[0].innerHTML =+ 'fetch'
   	  fetch('https://line-jarturon.herokuapp.com/getTask?userId='+userId)
@@ -37,18 +40,16 @@
 		
 	    return response.json();
 	  }).then((myJson) => {
-
+		let newRow
+		let table
 	    for (let each of myJson) {
-			const table = document.getElementsByClassName('container')[0]
-			const row = table.insertRow(0);
-			const checkbok = row.insertCell(0);
-			const name = row.insertCell(0);
-			const date = row.insertCell(1);
-			const time = row.insertCell(2);
-			checkbok.innerHTML = `<input type='checkbox' id='${each.name}'>`;
-			name.innerHTML = each.name;
-	        date.innerHTML = each.date;
-	        time.innerHTML = each.time;
+			table = document.getElementsByClassName('container')[0]
+			newRow = `<tr>
+			<td style="border: 1px solid black;"><input type='checkbox' id='${each.name}'></td>
+			<td style="border: 1px solid black;">${each.name}</td><td style="border: 1px solid black;">${each.date}</td>
+			<td style="border: 1px solid black;">${each.time}</td>
+			</tr>`;
+			table.innerHTML += newRow
 		}
 	  }).catch(error => {
 		    console.log(error)

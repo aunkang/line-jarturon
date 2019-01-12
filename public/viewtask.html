@@ -32,12 +32,12 @@
   
   function fetch(userId) {
   
-  
   fetch('https://line-jarturon.herokuapp.com/getTask?userId='+userId)
   .then(function(response) {
     return response.json();
-  })
-  .then(function(myJson) {
+  }).then(function(myJson) {
+	document.getElementsByClassName('error')[0].innerHTML += JSON.stringify(myJson)
+  	document.getElementsByClassName('error')[0].innerHTML += '<br />'
     for (let row of myJson) {
 		let node = document.createElement("div");
 		node.innerHTML = row['name']
@@ -45,7 +45,8 @@
 		document.getElementsByClassName('container')[0].innerHTML += '<br />'
 	}
   }).catch(error => {
-		document.getElementByClassNames('error')[0].innerHTML += node
+	    document.getElementByClassNames('error')[0].innerHTML += JSON.stringify("error")
+		document.getElementByClassNames('error')[0].innerHTML += JSON.stringify(error)
 		document.getElementsByClassName('error')[0].innerHTML += '<br />'
   });
   

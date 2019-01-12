@@ -46,15 +46,16 @@ public class Application {
 			c.add(Calendar.DATE, 1);
 			c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hhStr));
 			c.set(Calendar.MINUTE, Integer.parseInt(mmStr));
+			c.set(Calendar.SECOND, 0);
 			c.set(Calendar.MILLISECOND, 0);
 			date = c.getTime();
 			break;
 		}
 
 		case "today": {
-			c.add(Calendar.DATE, 1);
 			c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hhStr));
 			c.set(Calendar.MINUTE, Integer.parseInt(mmStr));
+			c.set(Calendar.SECOND, 0);
 			c.set(Calendar.MILLISECOND, 0);
 			date = c.getTime();
 			break;
@@ -72,6 +73,8 @@ public class Application {
 		task.setTime(hhStr+mmStr);
 		task.setDuedate(date);
 
+		tasks.add(task);
+		
 		return new TextMessage(
 				message.getText() + "    \n\n" + "Name: " + taskStr + "    \n" + "Date: " + date + "    \n" + "HH:mm : " + hhStr+":"+mmStr);
 	}

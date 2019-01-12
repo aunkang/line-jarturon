@@ -11,22 +11,22 @@ import org.springframework.web.bind.annotation.RestController;
 import linebot.Application;
 import linebot.Task;
 
-@RestController
+//@RestController
 public class WebviewController {
 
-	@GetMapping("/getTask")
-	public List<Task> getTasks(@RequestParam("userId") String userId) {
-		List<Task> tasks = Application.maps.get(userId);
-
-		Collections.sort(tasks, new Comparator<Task>() {
-			public int compare(Task o1, Task o2) {
-				if (o1.getDuedate() == null || o2.getDuedate() == null)
-					return 0;
-				return o1.getDuedate().compareTo(o2.getDuedate());
-			}
-		});
-
-		return tasks;
-	}
+//	@GetMapping("/getTask")
+//	public List<Task> getTasks(@RequestParam("userId") String userId) {
+//		List<Task> tasks = Application.maps.get(userId);
+//
+//		Collections.sort(tasks, new Comparator<Task>() {
+//			public int compare(Task o1, Task o2) {
+//				if (o1.getDuedate() == null || o2.getDuedate() == null)
+//					return 0;
+//				return o1.getDuedate().compareTo(o2.getDuedate());
+//			}
+//		});
+//
+//		return tasks;
+//	}
 
 }

@@ -1,11 +1,14 @@
 package linebot;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,7 +23,7 @@ import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 @SpringBootApplication
 @LineMessageHandler
 public class Application {
-	private List<Task> tasks = new ArrayList<Task>();
+	private Map<String, List<Task>> maps = new HashMap<String, List<Task>>();
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -29,17 +32,39 @@ public class Application {
 	@EventMapping
 	public Message handleTextMessage(MessageEvent<TextMessageContent> e) throws Exception {
 		System.out.println("event: " + e);
-		TextMessageContent message = e.getMessage();
-
-		String input = String.valueOf(message.getText());
+		String input = String.valueOf(this.getMessage(e));
+		String userId = String.valueOf(this.getIdentity(e));
 
 		String[] inputs = input.split(":");
 		String taskStr = inputs[0].trim();
 		String dateStr = inputs[1].trim();
 		String hhStr = inputs[2].trim();
 		String mmStr = inputs[3].trim();
-		Date date = new Date();
 
+		Date date = this.createDuedate(dateStr, hhStr, mmStr);
+
+		Task task = new Task();
+		task.setName(taskStr);
+		task.setDate(dateStr);
+		task.setTime(hhStr + mmStr);
+		task.setDuedate(date);
+
+		this.saveTask(userId, task);
+
+		return new TextMessage("Your task has been added" + "    \n\n" + "Name: " + taskStr + "    \n" + "Date: " + date
+				+ "    \n" + "HH:mm : " + hhStr + ":" + mmStr);
+	}
+
+	private String getMessage(MessageEvent<TextMessageContent> e) {
+		return e.getMessage().getText();
+	}
+
+	private String getIdentity(MessageEvent<TextMessageContent> e) {
+		return e.getSource().getSenderId();
+	}
+
+	private Date createDuedate(String dateStr, String hhStr, String mmStr) throws Exception {
+		Date date = new Date();
 		Calendar c = new GregorianCalendar();
 		switch (dateStr.toLowerCase()) {
 		case "tomorrow": {
@@ -66,16 +91,17 @@ public class Application {
 			break;
 		}
 		}
+		return date;
+	}
 
-		Task task = new Task();
-		task.setName(taskStr);
-		task.setDate(dateStr);
-		task.setTime(hhStr+mmStr);
-		task.setDuedate(date);
-
-		tasks.add(task);
-		
-		return new TextMessage(
-				message.getText() + "    \n\n" + "Name: " + taskStr + "    \n" + "Date: " + date + "    \n" + "HH:mm : " + hhStr+":"+mmStr);
+	private void saveTask(String userId, Task task) {
+		if (maps.containsKey(userId)) {
+			List<Task> tasks = maps.get(userId);
+			tasks.add(task);
+		} else {
+			List<Task> tasks = new ArrayList<Task>();
+			tasks.add(task);
+			maps.put(userId, tasks);
+		}
 	}
 }

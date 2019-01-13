@@ -8,6 +8,18 @@ public class Task implements Comparable<Task> {
 	private String time;
 	private String name;
 	private Date duedate;
+	private boolean importantFlag;
+	
+	
+
+
+	public boolean getImportantFlag() {
+		return importantFlag;
+	}
+
+	public void setImportantFlag(boolean importantFlag) {
+		this.importantFlag = importantFlag;
+	}
 
 	public String getDate() {
 		return date;

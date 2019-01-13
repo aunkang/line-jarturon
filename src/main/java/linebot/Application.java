@@ -46,6 +46,7 @@ public class Application {
 			String dateStr;
 			String hhStr;
 			String mmStr;
+			
 			if (inputs.length == 3) {
 				taskStr = inputs[0].trim();
 				dateStr = inputs[1].trim();
@@ -66,7 +67,7 @@ public class Application {
 					dateStr = dateStr + "/" + (ca.get(Calendar.MONTH) + 1);
 					dateStr = dateStr + "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
 				}
-			} else {
+			} else if (inputs.length == 4) {
 				taskStr = inputs[0].trim();
 				dateStr = inputs[1].trim();
 				hhStr = inputs[2].trim();
@@ -86,7 +87,17 @@ public class Application {
 					dateStr = dateStr + "/" + (ca.get(Calendar.MONTH) + 1);
 					dateStr = dateStr + "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
 				}
+			} else {
+				 taskStr = "";
+				 dateStr = "";
+				 hhStr = "";
+				 mmStr = "";
+				 return new TextMessage("Please input in format "
+						    + "\ntask : date/month/year : time e.g. Buy milk : 2/5/18 : 13:00\ntask : today : time e.g. Finish writing shopping list : today : 15:30\ntask : Tomorrow : time e.g. Watch movie : tomorrow : 18:00"
+							+ "\n\n See all task click link below. \n line://app/1613138841-EqAkLo6L");
+				
 			}
+			
 			SimpleDateFormat formatterDate = new SimpleDateFormat("d/M/yy HH:mm");
 			Date dueDate = formatterDate.parse(dateStr + " " + hhStr + ":" + mmStr);
 

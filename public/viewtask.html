@@ -43,12 +43,22 @@
 		table.innerHTML = ''
 		table.innerHTML += `<tr style="text-align: center;"><td style="border: 1px solid black;">Finish Task</td><td style="border: 1px solid black;">Important Task</td><td style="border: 1px solid black;">Name</td><td style="border: 1px solid black;">Date</td><td style="border: 1px solid black;">Time</td></tr>`
 	    for (let each of myJson) {
-			newRow = `<tr>
-			<td style="border: 1px solid black;"><input style="text-align: center;" type='checkbox' name='deleteFlag' id='${each.taskId}'></td>
-			<td style="border: 1px solid black;"><input style="text-align: center;" type='checkbox' name='importantFlag' id='${each.taskId}'></td>
-			<td style="border: 1px solid black;">${each.name}</td><td style="border: 1px solid black;">${each.date}</td>
-			<td style="border: 1px solid black;">${each.time}</td>
-			</tr>`;
+	    	if (each.importantFlag == 'true') {
+	    		newRow = `<tr>
+	    			<td style="border: 1px solid black;"><input style="text-align: center;" type='checkbox' name='deleteFlag' id='${each.taskId}' checked></td>
+	    			<td style="border: 1px solid black;"><input style="text-align: center;" type='checkbox' name='importantFlag' id='${each.taskId}'></td>
+	    			<td style="border: 1px solid black;">${each.name}</td><td style="border: 1px solid black;">${each.date}</td>
+	    			<td style="border: 1px solid black;">${each.time}</td>
+	    			</tr>`;
+	    	} else {
+	    		newRow = `<tr>
+	    			<td style="border: 1px solid black;"><input style="text-align: center;" type='checkbox' name='deleteFlag' id='${each.taskId}'></td>
+	    			<td style="border: 1px solid black;"><input style="text-align: center;" type='checkbox' name='importantFlag' id='${each.taskId}'></td>
+	    			<td style="border: 1px solid black;">${each.name}</td><td style="border: 1px solid black;">${each.date}</td>
+	    			<td style="border: 1px solid black;">${each.time}</td>
+	    			</tr>`;
+	    	}
+			
 			table.innerHTML += newRow
 		}
 	  }).catch(error => {
@@ -58,11 +68,11 @@
   
   function onSubmit() {
 	  const allDeleteItem = document.querySelectorAll('input[name="deleteFlag"]:checked')
-	  const allImportantItem = document.querySelectorAll('input[name="importantFlag"]:checked')
+	  const allImportantItem = document.querySelectorAll('input[name="importantFlag"]')
 	  let allSelectedID = []
 	  for (let each of allDeleteItem) {
 		  document.getElementsByClassName('error')[0].innerHTML += each.name;
-		  allSelectedID.push({taskId: each.id})
+		  allSelectedID.push({taskId: each.id, importantFlag: each.value})
 	  }
 	  fetch('https://line-jarturon.herokuapp.com/removeTask/'+ userID, {
 	        method: "DELETE", 

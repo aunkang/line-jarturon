@@ -26,8 +26,12 @@ public class AppRest {
 			for (int i = 0; i<= tasks.size()-1; i++) {
 				for (Task targetTask : targetTasks) {
 					if (tasks.get(i).getTaskId().equals(targetTask.getTaskId())) {
-						Application.maps.get(userId).get(i).setImportantFlag(true);
-					}
+						if (targetTask.isImportantFlag()) {
+							Application.maps.get(userId).get(i).setImportantFlag(true);
+						} else {
+							Application.maps.get(userId).get(i).setImportantFlag(false);
+						}
+					} 
 				}
 			}
 		}

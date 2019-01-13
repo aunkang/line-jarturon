@@ -93,7 +93,7 @@ public class Application {
 				 hhStr = "";
 				 mmStr = "";
 				 return new TextMessage("Please input in format "
-						    + "\ntask : date/month/year : time e.g. Buy milk : 2/5/18 : 13:00\ntask : today : time e.g. Finish writing shopping list : today : 15:30\ntask : Tomorrow : time e.g. Watch movie : tomorrow : 18:00"
+						    + "\ntask : date/month/year : time \ne.g. Buy milk : 2/5/18 : 13:00"
 							+ "\n\n See all task click link below. \n line://app/1613138841-EqAkLo6L");
 				
 			}

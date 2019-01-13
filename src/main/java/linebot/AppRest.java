@@ -57,8 +57,8 @@ public class AppRest {
 	public ResponseEntity<?> getTasks(@RequestParam("userId") String userId) {
 		List<Task> tasks = Application.maps.get(userId);
 		List<Task> resultTasks = Application.maps.get(userId);
-		// resultTasks = this.sortTask(tasks);
-		return new ResponseEntity<>(tasks, HttpStatus.OK);
+		resultTasks = this.sortTask(tasks);
+		return new ResponseEntity<>(resultTasks, HttpStatus.OK);
 	}
 	
 	public List<Task> sortTask(List<Task> tasks) {

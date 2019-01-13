@@ -8,7 +8,7 @@ public class Task implements Comparable<Task> {
 	private String time;
 	private String name;
 	private Date duedate;
-	private boolean importantFlag;
+	private Boolean importantFlag;
 	
 	
 

@@ -21,9 +21,9 @@ public class AppRest {
 		List<Task> sortedTask = new ArrayList<>();
 		
 		Task minimumTask = tasks.get(0);
-		int minYear = Integer.valueOf(minimumTask.getDate().split(":")[2]);
-		int minMonth = Integer.valueOf(minimumTask.getDate().split(":")[1]);
-		int minDay = Integer.valueOf(minimumTask.getDate().split(":")[0]);
+		int minYear = Integer.valueOf(minimumTask.getDate().split("/")[2]);
+		int minMonth = Integer.valueOf(minimumTask.getDate().split("/")[1]);
+		int minDay = Integer.valueOf(minimumTask.getDate().split("/")[0]);
 		int minHours = Integer.valueOf(minimumTask.getTime().split(":")[0]);
 		int minMinutes = Integer.valueOf(minimumTask.getTime().split(":")[1]);
 		int year;
@@ -35,9 +35,9 @@ public class AppRest {
 		int firstIndexSort = 0;
 		for (Task task : tasks) {
 			for (int i = firstIndexSort; i <= tasks.size()-1; i++) {
-				year = Integer.valueOf(tasks.get(i).getDate().split(":")[2]);
-				month = Integer.valueOf(tasks.get(i).getDate().split(":")[1]);
-				day = Integer.valueOf(tasks.get(i).getDate().split(":")[0]);
+				year = Integer.valueOf(tasks.get(i).getDate().split("/")[2]);
+				month = Integer.valueOf(tasks.get(i).getDate().split("/")[1]);
+				day = Integer.valueOf(tasks.get(i).getDate().split("/")[0]);
 				hours = Integer.valueOf(tasks.get(i).getTime().split(":")[0]);
 				minutes = Integer.valueOf(tasks.get(i).getTime().split(":")[1]);
 				
@@ -76,7 +76,6 @@ public class AppRest {
 						minimumTask = task;
 					}
 				}
-				
 			}
 			firstIndexSort++;
 			sortedTask.add(minimumTask);

@@ -86,7 +86,7 @@ public class Application {
 		Task task = new Task();
 		task.setName(taskStr);
 		task.setDate(dateStr);
-		task.setTime(hhStr + " : " + mmStr);
+		task.setTime(hhStr + ":" + mmStr);
 		task.setDuedate(dueDate);
 		
 		System.err.println("Hello, application!");

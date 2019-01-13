@@ -72,7 +72,7 @@
 	  let allSelectedID = []
 	  for (let each of allDeleteItem) {
 		  document.getElementsByClassName('error')[0].innerHTML += each.name;
-		  allSelectedID.push({taskId: each.id, importantFlag: each.value})
+		  allSelectedID.push({taskId: each.id, importantFlag: each.checked})
 	  }
 	  fetch('https://line-jarturon.herokuapp.com/removeTask/'+ userID, {
 	        method: "DELETE", 

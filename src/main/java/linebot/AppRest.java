@@ -2,6 +2,8 @@ package linebot;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -16,15 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AppRest {
-	
+
 	@PostMapping("/markImportant/{userId}")
 	public void markImportant(@PathVariable String userId, @RequestBody List<Task> targetTasks) {
 		List<Task> tasks = Application.maps.get(userId);
-		for (int i = 0; i<= tasks.size()-1; i++) {
-			for (Task targetTask : targetTasks) {
-				if (tasks.get(i).getTaskId().equals(targetTask.getTaskId())) {
-					tasks.get(i).setImportantFlag(targetTask.isImportantFlag());
-					break;
+		if (tasks != null && tasks.size() > 0) {
+			for (int i = 0; i<= tasks.size()-1; i++) {
+				for (Task targetTask : targetTasks) {
+					if (tasks.get(i).getTaskId().equals(targetTask.getTaskId())) {
+						Application.maps.get(userId).get(i).setImportantFlag(targetTask.isImportantFlag());
+					}
 				}
 			}
 		}
@@ -33,17 +36,19 @@ public class AppRest {
 	@DeleteMapping("/removeTask/{userId}")
 	public void deleteTask(@PathVariable String userId, @RequestBody List<Task> targetTasks) {
 		List<Task> tasks = Application.maps.get(userId);
-		List<Integer> deleteIndex = new ArrayList<>();
-		for (int i = 0; i<= tasks.size()-1; i++) {
-			for (Task targetTask : targetTasks) {
-				if (tasks.get(i).getTaskId().equals(targetTask.getTaskId())) {
-					deleteIndex.add(i);
-					break;
+		
+		if (tasks != null && tasks.size() > 0) {
+			List<Integer> deleteIndex = new ArrayList<>();
+			for (int i = 0; i<= tasks.size()-1; i++) {
+				for (Task targetTask : targetTasks) {
+					if (tasks.get(i).getTaskId().equals(targetTask.getTaskId())) {
+						deleteIndex.add(i);
+					}
 				}
 			}
-		}
-		for (int index : deleteIndex) {
-			tasks.remove(index);
+			for (int index : deleteIndex) {
+				Application.maps.get(userId).remove(index);
+			}
 		}
 	}
 	
@@ -153,8 +158,25 @@ public class AppRest {
 	}
 	
 	public List<Task> sortTask(List<Task> tasks) {
-		Collections.sort(tasks);
-		return tasks;
+		List<Task> comTasks = new ArrayList<Task>();
+		List<Task> favTasks = new ArrayList<Task>();
+		List<Task> normalTasks = new ArrayList<Task>();
+		
+		for (Task task : tasks) {
+			if (task.isImportantFlag()) {
+				favTasks.add(task);
+			} else {
+				normalTasks.add(task);
+			}
+		}
+		
+		Collections.sort(favTasks);
+		Collections.sort(normalTasks);
+		
+		comTasks.addAll(favTasks);
+		comTasks.addAll(normalTasks);
+
+		return comTasks;
 	}
 
 }

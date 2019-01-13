@@ -15,7 +15,7 @@
 	
 	<div class="error"></div>
 	
-	<button onclick="onSubmit()">Remvoe</button>
+	<button onclick="onSubmit()">Submit</button>
   
   
   <script> 
@@ -43,8 +43,8 @@
 	    for (let each of myJson) {
 			table = document.getElementsByClassName('container')[0]
 			newRow = `<tr>
-			<td style="border: 1px solid black;"><input type='checkbox' name='deleteFlag' id='${each.taskId}'></td>
-			<td style="border: 1px solid black;"><input type='checkbox' name='importantFlag' id='${each.taskId}'></td>
+			<td style="border: 1px solid black;"><input style="text-align: center;" type='checkbox' name='deleteFlag' id='${each.taskId}'></td>
+			<td style="border: 1px solid black;"><input style="text-align: center;" type='checkbox' name='importantFlag' id='${each.taskId}'></td>
 			<td style="border: 1px solid black;">${each.name}</td><td style="border: 1px solid black;">${each.date}</td>
 			<td style="border: 1px solid black;">${each.time}</td>
 			</tr>`;
@@ -65,18 +65,18 @@
 	        method: "DELETE", 
 	        headers: { "Content-Type": "application/json" },
 	        body: JSON.stringify(allSelectedID)
-  	  }).then(response => response.json());
-	  
-	  const allImportantItem = document.querySelectorAll('input[name="importantFlag"]:checked')
-	  let allSelectedID2 = []
-	  for (const each of allImportantItem) {
-		  allSelectedID2.push({taskId: each.id})
-	  }
-	  fetch('https://line-jarturon.herokuapp.com/markImportant/'+ userID, {
-	        method: "POST", 
-	        headers: { "Content-Type": "application/json" },
-	        body: JSON.stringify(allSelectedID2)
-  	  }).then(response => response.json())
+  	  }).then(response => {
+  		const allImportantItem = document.querySelectorAll('input[name="importantFlag"]:checked')
+	  	  let allSelectedID2 = []
+	  	  for (const each of allImportantItem) {
+	  		  allSelectedID2.push({taskId: each.id})
+	  	  }
+	  	  fetch('https://line-jarturon.herokuapp.com/markImportant/'+ userID, {
+	  	        method: "POST", 
+	  	        headers: { "Content-Type": "application/json" },
+	  	        body: JSON.stringify(allSelectedID2)
+	    	  }).then(response => fetchData(userID))
+  	  });
   }
   
   

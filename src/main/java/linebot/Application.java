@@ -45,13 +45,13 @@ public class Application {
 			hhStr = "12";
 			mmStr = "";
 			if (dateStr.equalsIgnoreCase("tomorrow")) {
-				Calendar ca  = Calendar.getInstance();
+				Calendar ca  = new GregorianCalendar();
 				ca.setTimeInMillis(e.getTimestamp().getEpochSecond());
 				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH)+1);
 				dateStr = dateStr + "/" + (ca.get(Calendar.MONTH)+1);
 				dateStr = dateStr + "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
 			} else if (dateStr.equalsIgnoreCase("today")) {
-				Calendar ca  = Calendar.getInstance();
+				Calendar ca  = new GregorianCalendar();
 				ca.setTimeInMillis(e.getTimestamp().getEpochSecond());
 				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH));
 				dateStr = dateStr + "/" + (ca.get(Calendar.MONTH)+1);

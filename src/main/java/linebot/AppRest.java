@@ -56,7 +56,8 @@ public class AppRest {
 	@GetMapping("/getTask")
 	public ResponseEntity<?> getTasks(@RequestParam("userId") String userId) {
 		List<Task> tasks = Application.maps.get(userId);
-		tasks = this.sortTask(tasks);
+		List<Task> resultTasks = Application.maps.get(userId);
+		// resultTasks = this.sortTask(tasks);
 		return new ResponseEntity<>(tasks, HttpStatus.OK);
 	}
 	

@@ -19,8 +19,8 @@ public class AppRest {
 		List<Task> sortedTask = new ArrayList<>();
 		Task temp;
 		
-		for (int round = 0; round <= tasks.size()-1; round++) {
-			for (int index = round+1; index <= tasks.size()-2; index++ ) {
+		for (int round = 0; round <= tasks.size()-2; round++) {
+			for (int index = round+1; index <= tasks.size()-1; index++ ) {
 				if (tasks.get(round).getImportantFlag()) {
 					if (tasks.get(index).getImportantFlag()) {
 						if (tasks.get(round).getDuedate().compareTo(tasks.get(index).getDuedate()) > 0) {

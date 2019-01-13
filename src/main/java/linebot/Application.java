@@ -92,7 +92,7 @@ public class Application {
 		this.saveTask(userId, task);
 		
 		return new TextMessage("Your task has been added" + "    \n\n" + "Name: " + taskStr + "    \n" + "Date: " + dueDate
-				+ "    \n" + "HH:mm : " + hhStr + ":" + mmStr + "\n\n See all task click link below. \n line://app/1613138841-EqAkLo6L" + "\n\n " + dateStr + "\n\n" + "date: " + new Date(e.getTimestamp().getEpochSecond()));
+				+ "    \n" + "HH:mm : " + hhStr + ":" + mmStr + "\n\n See all task click link below. \n line://app/1613138841-EqAkLo6L" + "\n\n " + dateStr + "\n\n" + "date: " + new Date(e.getTimestamp().getEpochSecond()) + "\n\n " + new GregorianCalendar() );
 	}
 
 	private String getMessage(MessageEvent<TextMessageContent> e) {

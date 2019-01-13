@@ -59,7 +59,7 @@
 	  const allDeleteItem = document.querySelectorAll('input[name="deleteFlag"]:checked')
 	  let allSelectedID = []
 	  for (const each of allDeleteItem) {
-		  allSelectedID.push(each.id)
+		  allSelectedID.push({taskId: each.id})
 	  }
 	  fetch('https://line-jarturon.herokuapp.com/removeTask/'+ userID, {
 	        method: "DELETE", 
@@ -70,7 +70,7 @@
 	  const allImportantItem = document.querySelectorAll('input[name="importantFlag"]:checked')
 	  let allSelectedID2 = []
 	  for (const each of allImportantItem) {
-		  allSelectedID2.push(each.id)
+		  allSelectedID2.push({taskId: each.id})
 	  }
 	  fetch('https://line-jarturon.herokuapp.com/markImportant/'+ userID, {
 	        method: "POST", 

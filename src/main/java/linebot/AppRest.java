@@ -20,11 +20,13 @@ public class AppRest {
 	@PostMapping("/markImportant/{userId}")
 	public void markImportant(@PathVariable String userId, @RequestBody List<Task> targetTasks) {
 		List<Task> tasks = Application.maps.get(userId);
-		for (int i = 0; i<= tasks.size()-1; i++) {
-			for (Task targetTask : targetTasks) {
-				if (tasks.get(i).getTaskId().equals(targetTask.getTaskId())) {
-					tasks.get(i).setImportantFlag(targetTask.isImportantFlag());
-					break;
+		if (tasks != null && tasks.size() > 0) {
+			for (int i = 0; i<= tasks.size()-1; i++) {
+				for (Task targetTask : targetTasks) {
+					if (tasks.get(i).getTaskId().equals(targetTask.getTaskId())) {
+						tasks.get(i).setImportantFlag(targetTask.isImportantFlag());
+						break;
+					}
 				}
 			}
 		}
@@ -33,17 +35,20 @@ public class AppRest {
 	@DeleteMapping("/removeTask/{userId}")
 	public void deleteTask(@PathVariable String userId, @RequestBody List<Task> targetTasks) {
 		List<Task> tasks = Application.maps.get(userId);
-		List<Integer> deleteIndex = new ArrayList<>();
-		for (int i = 0; i<= tasks.size()-1; i++) {
-			for (Task targetTask : targetTasks) {
-				if (tasks.get(i).getTaskId().equals(targetTask.getTaskId())) {
-					deleteIndex.add(i);
-					break;
+		
+		if (tasks != null && tasks.size() > 0) {
+			List<Integer> deleteIndex = new ArrayList<>();
+			for (int i = 0; i<= tasks.size()-1; i++) {
+				for (Task targetTask : targetTasks) {
+					if (tasks.get(i).getTaskId().equals(targetTask.getTaskId())) {
+						deleteIndex.add(i);
+						break;
+					}
 				}
 			}
-		}
-		for (int index : deleteIndex) {
-			tasks.remove(index);
+			for (int index : deleteIndex) {
+				tasks.remove(index);
+			}
 		}
 	}
 	

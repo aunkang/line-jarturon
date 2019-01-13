@@ -21,7 +21,7 @@ public class ScheduledTask {
 	 @Autowired
 	 public LineMessagingClient lineMessagingClient;
 	 
-	@Scheduled(cron = "*/10 * * * * *", zone="Asia/Bangkok")
+	@Scheduled(cron = "0 0 12 * * ?", zone="Asia/Bangkok")
 	public void pushNotification12PM() {
 		Map<String, List<Task>> tasks = Application.maps;
 		Set<String> userIds = tasks.keySet();
@@ -36,10 +36,4 @@ public class ScheduledTask {
 			lineMessagingClient.pushMessage(pushMessage);
 		}
 	}
-	 
-	 @Scheduled(cron = "0 0 18 1/1 * ? *", zone="Asia/Bangkok")
-		public void pushNotification6PM() {
-		 pushNotification12PM();
-		}
-
 }

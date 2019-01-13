@@ -61,7 +61,7 @@
 	  const allImportantItem = document.querySelectorAll('input[name="importantFlag"]:checked')
 	  let allSelectedID = []
 	  for (let each of allDeleteItem) {
-		  document.getElementsByClassName('error')[0].innerHtml += each.name;
+		  document.getElementsByClassName('error')[0].innerHTML += each.name;
 		  allSelectedID.push({taskId: each.id})
 	  }
 	  fetch('https://line-jarturon.herokuapp.com/removeTask/'+ userID, {

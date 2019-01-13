@@ -80,7 +80,7 @@ public class Application {
 				dateStr = dateStr + "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
 			}
 		}
-		SimpleDateFormat formatterDate = new SimpleDateFormat("d/m/yy HH:mm");
+		SimpleDateFormat formatterDate = new SimpleDateFormat("d/M/yy HH:mm");
 		Date dueDate = formatterDate.parse(dateStr + " " + hhStr + ":" + mmStr);
 
 		Task task = new Task();

@@ -6,12 +6,46 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AppRest {
+	
+	@PostMapping("/markImportant/{userId}")
+	public void markImportant(@PathVariable String userId, @RequestBody List<Task> targetTasks) {
+		List<Task> tasks = Application.maps.get(userId);
+		for (int i = 0; i<= tasks.size()-1; i++) {
+			for (Task targetTask : targetTasks) {
+				if (tasks.get(i).getTaskId().equals(targetTask.getTaskId())) {
+					tasks.get(i).setImportantFlag(targetTask.isImportantFlag());
+					break;
+				}
+			}
+		}
+	}
+	
+	@DeleteMapping("/removeTask/{userId}")
+	public void deleteTask(@PathVariable String userId, @RequestBody List<Task> targetTasks) {
+		List<Task> tasks = Application.maps.get(userId);
+		List<Integer> deleteIndex = new ArrayList<>();
+		for (int i = 0; i<= tasks.size()-1; i++) {
+			for (Task targetTask : targetTasks) {
+				if (tasks.get(i).getTaskId().equals(targetTask.getTaskId())) {
+					deleteIndex.add(i);
+					break;
+				}
+			}
+		}
+		for (int index : deleteIndex) {
+			tasks.remove(index);
+		}
+	}
 	
 	@GetMapping("/getTask")
 	public ResponseEntity<?> getTasks(@RequestParam("userId") String userId) {
@@ -19,39 +53,39 @@ public class AppRest {
 		List<Task> sortedTask = new ArrayList<>();
 		Task temp;
 		
-		for (int round = 0; round <= tasks.size()-2; round++) {
-			for (int index = round+1; index <= tasks.size()-1; index++ ) {
-				if (tasks.get(round).getImportantFlag()) {
-					if (tasks.get(index).getImportantFlag()) {
-						if (tasks.get(round).getDuedate().compareTo(tasks.get(index).getDuedate()) > 0) {
-							temp = tasks.get(round);
-							tasks.remove(round);
-							tasks.add(round, tasks.get(index));
-							tasks.remove(index);
-							tasks.add(index, temp);
-						}
-					} 
-				} 
-				else {
-					if (tasks.get(index).getImportantFlag()) {
-						temp = tasks.get(round);
-						tasks.remove(round);
-						tasks.add(round, tasks.get(index));
-						tasks.remove(index);
-						tasks.add(index, temp);
-					}
-					else {
-						if (tasks.get(round).getDuedate().compareTo(tasks.get(index).getDuedate()) > 0) {
-							temp = tasks.get(round);
-							tasks.remove(round);
-							tasks.add(round, tasks.get(index));
-							tasks.remove(index);
-							tasks.add(index, temp);
-						}
-					}
-				}
-			}
-		}
+//		for (int round = 0; round <= tasks.size()-2; round++) {
+//			for (int index = round+1; index <= tasks.size()-1; index++ ) {
+//				if (tasks.get(round).getImportantFlag()) {
+//					if (tasks.get(index).getImportantFlag()) {
+//						if (tasks.get(round).getDuedate().compareTo(tasks.get(index).getDuedate()) > 0) {
+//							temp = tasks.get(round);
+//							tasks.remove(round);
+//							tasks.add(round, tasks.get(index));
+//							tasks.remove(index);
+//							tasks.add(index, temp);
+//						}
+//					} 
+//				} 
+//				else {
+//					if (tasks.get(index).getImportantFlag()) {
+//						temp = tasks.get(round);
+//						tasks.remove(round);
+//						tasks.add(round, tasks.get(index));
+//						tasks.remove(index);
+//						tasks.add(index, temp);
+//					}
+//					else {
+//						if (tasks.get(round).getDuedate().compareTo(tasks.get(index).getDuedate()) > 0) {
+//							temp = tasks.get(round);
+//							tasks.remove(round);
+//							tasks.add(round, tasks.get(index));
+//							tasks.remove(index);
+//							tasks.add(index, temp);
+//						}
+//					}
+//				}
+//			}
+//		}
 		
 //		Task minimumTask = tasks.get(0);
 //		int minYear = Integer.valueOf(minimumTask.getDate().split("/")[2]);

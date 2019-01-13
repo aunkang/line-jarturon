@@ -8,12 +8,21 @@ public class Task implements Comparable<Task> {
 	private String time;
 	private String name;
 	private Date duedate;
+	private String taskId;
 	private Boolean importantFlag;
 	
 	
 
 
-	public Boolean getImportantFlag() {
+	public String getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(String taskId) {
+		this.taskId = taskId;
+	}
+
+	public Boolean isImportantFlag() {
 		return importantFlag;
 	}
 

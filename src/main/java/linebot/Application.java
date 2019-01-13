@@ -65,6 +65,7 @@ public class Application {
 			if (dateStr.equalsIgnoreCase("tomorrow")) {
 				Calendar ca  = Calendar.getInstance();
 				ca.setTime(new Date(e.getTimestamp().getEpochSecond()));
+				
 				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH)+1);
 				dateStr = dateStr + "/" + (ca.get(Calendar.MONTH)+1);
 				dateStr = dateStr + "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
@@ -91,7 +92,7 @@ public class Application {
 		this.saveTask(userId, task);
 		
 		return new TextMessage("Your task has been added" + "    \n\n" + "Name: " + taskStr + "    \n" + "Date: " + dueDate
-				+ "    \n" + "HH:mm : " + hhStr + ":" + mmStr + "\n\n See all task click link below. \n line://app/1613138841-EqAkLo6L" + "\n\n " + dateStr);
+				+ "    \n" + "HH:mm : " + hhStr + ":" + mmStr + "\n\n See all task click link below. \n line://app/1613138841-EqAkLo6L" + "\n\n " + dateStr + "\n\n" + "date: " + new Date(e.getTimestamp().getEpochSecond()));
 	}
 
 	private String getMessage(MessageEvent<TextMessageContent> e) {

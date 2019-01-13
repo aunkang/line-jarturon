@@ -64,7 +64,7 @@ public class Application {
 			mmStr = inputs[3].trim();
 			if (dateStr.equalsIgnoreCase("tomorrow")) {
 				Calendar ca  = Calendar.getInstance();
-				ca.setTimeInMillis(e.getTimestamp().getEpochSecond());
+				ca.setTime(new Date(e.getTimestamp().getEpochSecond()));
 				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH)+1);
 				dateStr = dateStr + "/" + (ca.get(Calendar.MONTH)+1);
 				dateStr = dateStr + "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));

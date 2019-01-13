@@ -46,13 +46,15 @@ public class Application {
 			mmStr = "";
 			if (dateStr.equalsIgnoreCase("tomorrow")) {
 				Calendar ca  = new GregorianCalendar();
-				ca.setTimeInMillis(e.getTimestamp().getEpochSecond());
+				ca.setTimeInMillis(e.getTimestamp().getEpochSecond()*1000);
+				
 				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH)+1);
 				dateStr = dateStr + "/" + (ca.get(Calendar.MONTH)+1);
 				dateStr = dateStr + "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
 			} else if (dateStr.equalsIgnoreCase("today")) {
 				Calendar ca  = new GregorianCalendar();
-				ca.setTimeInMillis(e.getTimestamp().getEpochSecond());
+				ca.setTimeInMillis(e.getTimestamp().getEpochSecond()*1000);
+				
 				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH));
 				dateStr = dateStr + "/" + (ca.get(Calendar.MONTH)+1);
 				dateStr = dateStr + "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
@@ -64,14 +66,15 @@ public class Application {
 			mmStr = inputs[3].trim();
 			if (dateStr.equalsIgnoreCase("tomorrow")) {
 				Calendar ca = new GregorianCalendar();
-				ca.setTime(new Date(e.getTimestamp().getEpochSecond()));
+				ca.setTimeInMillis(e.getTimestamp().getEpochSecond()*1000);
 				
 				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH)+1);
 				dateStr = dateStr + "/" + (ca.get(Calendar.MONTH)+1);
 				dateStr = dateStr + "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
 			} else if (dateStr.equalsIgnoreCase("today")) {
 				Calendar ca = new GregorianCalendar();
-				ca.setTimeInMillis(e.getTimestamp().getEpochSecond());
+				ca.setTimeInMillis(e.getTimestamp().getEpochSecond()*1000);
+				
 				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH));
 				dateStr = dateStr + "/" + (ca.get(Calendar.MONTH)+1);
 				dateStr = dateStr + "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));

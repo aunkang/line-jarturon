@@ -1,6 +1,5 @@
 package linebot;
 
-import java.util.Comparator;
 import java.util.Date;
 
 public class Task implements Comparable<Task> {
@@ -11,7 +10,9 @@ public class Task implements Comparable<Task> {
 	private String taskId;
 	private Boolean importantFlag;
 	
-	
+	public Task () {
+		this.importantFlag = false;
+	}
 
 
 	public String getTaskId() {

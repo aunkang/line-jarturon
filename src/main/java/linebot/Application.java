@@ -48,14 +48,14 @@ public class Application {
 				Calendar ca  = Calendar.getInstance();
 				ca.setTimeInMillis(e.getTimestamp().getEpochSecond());
 				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH)+1);
-				dateStr = "/" + (ca.get(Calendar.MONTH)+1);
-				dateStr = "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
+				dateStr = dateStr + "/" + (ca.get(Calendar.MONTH)+1);
+				dateStr = dateStr + "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
 			} else if (dateStr.equalsIgnoreCase("today")) {
 				Calendar ca  = Calendar.getInstance();
 				ca.setTimeInMillis(e.getTimestamp().getEpochSecond());
 				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH));
-				dateStr = "/" + (ca.get(Calendar.MONTH)+1);
-				dateStr = "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
+				dateStr = dateStr + "/" + (ca.get(Calendar.MONTH)+1);
+				dateStr = dateStr + "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
 			}
 		} else {
 			taskStr = inputs[0].trim();
@@ -66,14 +66,14 @@ public class Application {
 				Calendar ca  = Calendar.getInstance();
 				ca.setTimeInMillis(e.getTimestamp().getEpochSecond());
 				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH)+1);
-				dateStr = "/" + (ca.get(Calendar.MONTH)+1);
-				dateStr = "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
+				dateStr = dateStr + "/" + (ca.get(Calendar.MONTH)+1);
+				dateStr = dateStr + "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
 			} else if (dateStr.equalsIgnoreCase("today")) {
 				Calendar ca  = Calendar.getInstance();
 				ca.setTimeInMillis(e.getTimestamp().getEpochSecond());
 				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH));
-				dateStr = "/" + (ca.get(Calendar.MONTH)+1);
-				dateStr = "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
+				dateStr = dateStr + "/" + (ca.get(Calendar.MONTH)+1);
+				dateStr = dateStr + "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
 			}
 		}
 		SimpleDateFormat formatterDate = new SimpleDateFormat("d/m/yy HH:mm");

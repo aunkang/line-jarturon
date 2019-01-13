@@ -8,12 +8,21 @@ public class Task implements Comparable<Task> {
 	private String time;
 	private String name;
 	private Date duedate;
+	private String taskId;
 	private Boolean importantFlag;
 	
 	
 
 
-	public Boolean getImportantFlag() {
+	public String getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(String taskId) {
+		this.taskId = taskId;
+	}
+
+	public Boolean isImportantFlag() {
 		return importantFlag;
 	}
 
@@ -55,30 +64,7 @@ public class Task implements Comparable<Task> {
 
 	@Override
 	public int compareTo(Task compareFruit) {
-
 		// ascending order
 		return this.getDuedate().compareTo(compareFruit.getDuedate());
-
-		// descending order
-		// return compareQuantity - this.quantity;
-
 	}
-
-	public static Comparator<Task> DueDateComparator = new Comparator<Task>() {
-
-		public int compare(Task fruit1, Task fruit2) {
-
-			if (fruit1.getDuedate() == null || fruit2.getDuedate() == null) {
-				return 0;
-			}
-
-			// ascending order
-			return fruit1.getDuedate().compareTo(fruit2.getDuedate());
-
-			// descending order
-			// return fruitName2.compareTo(fruitName1);
-		}
-
-	};
-
 }

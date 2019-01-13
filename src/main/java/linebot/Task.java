@@ -11,7 +11,7 @@ public class Task implements Comparable<Task> {
 	private Boolean importantFlag;
 	
 	public Task () {
-		this.importantFlag = true;
+		this.importantFlag = false;
 	}
 
 

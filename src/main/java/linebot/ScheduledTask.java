@@ -1,23 +1,21 @@
 package linebot;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.model.PushMessage;
-import com.linecorp.bot.model.ReplyMessage;
-import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.TextMessage;
-import com.linecorp.bot.spring.boot.LineBotProperties;
 
 
 @Component
+@EnableScheduling
 public class ScheduledTask {
 	
 	 @Autowired

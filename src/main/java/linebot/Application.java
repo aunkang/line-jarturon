@@ -36,7 +36,11 @@ public class Application {
 		System.out.println("event: " + e);
 		String input = String.valueOf(this.getMessage(e));
 		String userId = String.valueOf(this.getIdentity(e));
-
+		
+		if (input.equalsIgnoreCase("edit")) {
+			return new TextMessage("See all task click link below. \n line://app/1613138841-EqAkLo6L");
+		} else {
+ 
 		String[] inputs = input.split(":");
 		String taskStr;
 		String dateStr;
@@ -100,6 +104,7 @@ public class Application {
 		
 		return new TextMessage("Your task has been added" + "    \n\n" + "Name: " + taskStr + "    \n" + "Date: " + dateStr
 				+ "    \n" + "HH:mm : " + hhStr + ":" + mmStr + "\n\n See all task click link below. \n line://app/1613138841-EqAkLo6L");
+		}
 	}
 	
 	private String genTaskId() {

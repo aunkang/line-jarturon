@@ -35,12 +35,49 @@ public class Application {
 		String userId = String.valueOf(this.getIdentity(e));
 
 		String[] inputs = input.split(":");
-		String taskStr = inputs[0].trim();
-		String dateStr = inputs[1].trim();
-		String hhStr = inputs[2].trim();
-		String mmStr = inputs[3].trim();
-
-		Date dueDate = this.createDuedate(dateStr, hhStr, mmStr);
+		String taskStr;
+		String dateStr;
+		String hhStr;
+		String mmStr;
+		if (inputs.length == 3) {
+			taskStr = inputs[0].trim();
+			dateStr = inputs[1].trim();
+			hhStr = "12";
+			mmStr = "";
+			if (dateStr.equalsIgnoreCase("tomorrow")) {
+				Calendar ca  = Calendar.getInstance();
+				ca.setTimeInMillis(e.getTimestamp().getEpochSecond());
+				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH)+1);
+				dateStr = "/" + (ca.get(Calendar.MONTH)+1);
+				dateStr = "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
+			} else if (dateStr.equalsIgnoreCase("today")) {
+				Calendar ca  = Calendar.getInstance();
+				ca.setTimeInMillis(e.getTimestamp().getEpochSecond());
+				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH));
+				dateStr = "/" + (ca.get(Calendar.MONTH)+1);
+				dateStr = "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
+			}
+		} else {
+			taskStr = inputs[0].trim();
+			dateStr = inputs[1].trim();
+			hhStr = inputs[2].trim();
+			mmStr = inputs[3].trim();
+			if (dateStr.equalsIgnoreCase("tomorrow")) {
+				Calendar ca  = Calendar.getInstance();
+				ca.setTimeInMillis(e.getTimestamp().getEpochSecond());
+				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH)+1);
+				dateStr = "/" + (ca.get(Calendar.MONTH)+1);
+				dateStr = "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
+			} else if (dateStr.equalsIgnoreCase("today")) {
+				Calendar ca  = Calendar.getInstance();
+				ca.setTimeInMillis(e.getTimestamp().getEpochSecond());
+				dateStr = String.valueOf(ca.get(Calendar.DAY_OF_MONTH));
+				dateStr = "/" + (ca.get(Calendar.MONTH)+1);
+				dateStr = "/" + (String.valueOf(ca.get(Calendar.YEAR)).substring(2));
+			}
+		}
+		SimpleDateFormat formatterDate = new SimpleDateFormat("d/m/yy HH:mm");
+		Date dueDate = formatterDate.parse(dateStr + " " + hhStr + ":" + mmStr);
 
 		Task task = new Task();
 		task.setName(taskStr);
@@ -65,36 +102,35 @@ public class Application {
 		return e.getSource().getSenderId();
 	}
 
-	private Date createDuedate(String dateStr, String hhStr, String mmStr) throws Exception {
-		Date date = new Date();
-		Calendar c = new GregorianCalendar();
-		switch (dateStr.toLowerCase()) {
-		case "tomorrow": {
-			c.add(Calendar.DATE, 1);
-			c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hhStr));
-			c.set(Calendar.MINUTE, Integer.parseInt(mmStr));
-			c.set(Calendar.SECOND, 0);
-			c.set(Calendar.MILLISECOND, 0);
-			date = c.getTime();
-			break;
-		}
+//	private Date createDuedate(String dateStr, String hhStr, String mmStr) throws Exception {
+//		Date date = new Date();
+//		Calendar c = new GregorianCalendar();
+//		switch (dateStr.toLowerCase()) {
+//		case "tomorrow": {
+//			c.add(Calendar.DATE, 1);
+//			c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hhStr));
+//			c.set(Calendar.MINUTE, Integer.parseInt(mmStr));
+//			c.set(Calendar.SECOND, 0);
+//			c.set(Calendar.MILLISECOND, 0);
+//			date = c.getTime();
+//			break;
+//		}
 
-		case "today": {
-			c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hhStr));
-			c.set(Calendar.MINUTE, Integer.parseInt(mmStr));
-			c.set(Calendar.SECOND, 0);
-			c.set(Calendar.MILLISECOND, 0);
-			date = c.getTime();
-			break;
-		}
-		default: {
-			SimpleDateFormat formatterDate = new SimpleDateFormat("d/m/yy HH:mm");
-			date = formatterDate.parse(dateStr + " " + hhStr + ":" + mmStr);
-			break;
-		}
-		}
-		return date;
-	}
+//		case "today": {
+//			c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hhStr));
+//			c.set(Calendar.MINUTE, Integer.parseInt(mmStr));
+//			c.set(Calendar.SECOND, 0);
+//			c.set(Calendar.MILLISECOND, 0);
+//			date = c.getTime();
+//			break;
+//		}
+//		default: {
+//			SimpleDateFormat formatterDate = new SimpleDateFormat("d/m/yy HH:mm");
+//			date = formatterDate.parse(dateStr + " " + hhStr + ":" + mmStr);
+//			break;
+//		}
+//		}
+//		return date;
 
 	private void saveTask(String userId, Task task) {
 		if (maps.containsKey(userId)) {

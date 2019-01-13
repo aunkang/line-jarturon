@@ -13,11 +13,11 @@ public class Task implements Comparable<Task> {
 	
 
 
-	public boolean getImportantFlag() {
+	public Boolean getImportantFlag() {
 		return importantFlag;
 	}
 
-	public void setImportantFlag(boolean importantFlag) {
+	public void setImportantFlag(Boolean importantFlag) {
 		this.importantFlag = importantFlag;
 	}
 

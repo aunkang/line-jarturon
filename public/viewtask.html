@@ -9,7 +9,7 @@
   <body onload="initialize();">
   
 	<table style="border: 1px solid black;width: 60%;margin: 0 auto;" class="container">
-		<tr style="text-align: center;"><td style="border: 1px solid black;">Finish Task</td><td style="border: 1px solid black;">Important Task</td><td style="border: 1px solid black;">Name</td><td style="border: 1px solid black;">Date</td><td style="border: 1px solid black;">Time</td></tr>
+		
 	</table>
 	
 	
@@ -39,9 +39,10 @@
 	    return response.json();
 	  }).then((myJson) => {
 		let newRow
-		let table
+		let table = document.getElementsByClassName('container')[0]
+		table.innerHTML = ''
+		table.innerHTML += `<tr style="text-align: center;"><td style="border: 1px solid black;">Finish Task</td><td style="border: 1px solid black;">Important Task</td><td style="border: 1px solid black;">Name</td><td style="border: 1px solid black;">Date</td><td style="border: 1px solid black;">Time</td></tr>`
 	    for (let each of myJson) {
-			table = document.getElementsByClassName('container')[0]
 			newRow = `<tr>
 			<td style="border: 1px solid black;"><input style="text-align: center;" type='checkbox' name='deleteFlag' id='${each.taskId}'></td>
 			<td style="border: 1px solid black;"><input style="text-align: center;" type='checkbox' name='importantFlag' id='${each.taskId}'></td>

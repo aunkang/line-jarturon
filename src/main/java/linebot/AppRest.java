@@ -24,8 +24,7 @@ public class AppRest {
 			for (int i = 0; i<= tasks.size()-1; i++) {
 				for (Task targetTask : targetTasks) {
 					if (tasks.get(i).getTaskId().equals(targetTask.getTaskId())) {
-						tasks.get(i).setImportantFlag(targetTask.isImportantFlag());
-						break;
+						Application.maps.get(userId).get(i).setImportantFlag(targetTask.isImportantFlag());
 					}
 				}
 			}
@@ -42,12 +41,11 @@ public class AppRest {
 				for (Task targetTask : targetTasks) {
 					if (tasks.get(i).getTaskId().equals(targetTask.getTaskId())) {
 						deleteIndex.add(i);
-						break;
 					}
 				}
 			}
 			for (int index : deleteIndex) {
-				tasks.remove(index);
+				Application.maps.get(userId).remove(index);
 			}
 		}
 	}

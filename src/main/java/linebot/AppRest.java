@@ -61,11 +61,13 @@ public class AppRest {
 	}
 	
 	public List<Task> sortTask(List<Task> tasks) {
+		List<Task> paramsTasks = new ArrayList<Task>(tasks);
+		
 		List<Task> comTasks = new ArrayList<Task>();
 		List<Task> favTasks = new ArrayList<Task>();
 		List<Task> normalTasks = new ArrayList<Task>();
 		
-		for (Task task : tasks) {
+		for (Task task : paramsTasks) {
 			if (task.isImportantFlag()) {
 				favTasks.add(task);
 			} else {

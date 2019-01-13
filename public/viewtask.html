@@ -43,10 +43,10 @@
 		table.innerHTML = ''
 		table.innerHTML += `<tr style="text-align: center;"><td style="border: 1px solid black;">Finish Task</td><td style="border: 1px solid black;">Important Task</td><td style="border: 1px solid black;">Name</td><td style="border: 1px solid black;">Date</td><td style="border: 1px solid black;">Time</td></tr>`
 	    for (let each of myJson) {
-	    	if (each.importantFlag == 'true') {
+	    	if (each.importantFlag == 'true' || each.importantFlag == true) {
 	    		newRow = `<tr>
-	    			<td style="border: 1px solid black;"><input style="text-align: center;" type='checkbox' name='deleteFlag' id='${each.taskId}' checked></td>
-	    			<td style="border: 1px solid black;"><input style="text-align: center;" type='checkbox' name='importantFlag' id='${each.taskId}'></td>
+	    			<td style="border: 1px solid black;"><input style="text-align: center;" type='checkbox' name='deleteFlag' id='${each.taskId}'></td>
+	    			<td style="border: 1px solid black;"><input style="text-align: center;" type='checkbox' name='importantFlag' id='${each.taskId}' checked></td>
 	    			<td style="border: 1px solid black;">${each.name}</td><td style="border: 1px solid black;">${each.date}</td>
 	    			<td style="border: 1px solid black;">${each.time}</td>
 	    			</tr>`;

@@ -31,7 +31,7 @@ public class ScheduledTask {
 			for (Task targetTask : targetTasks) {
 				replyMessage += "Task Name: " + targetTask.getName() + "\n";
 			}
-			replyMessage += "See all task click link below \n line://app/1613138841-EqAkLo6L";
+			replyMessage += "\n\n See all task click link below \n line://app/1613138841-EqAkLo6L";
 			PushMessage pushMessage = new PushMessage(userId, new TextMessage(replyMessage));
 			lineMessagingClient.pushMessage(pushMessage);
 		}

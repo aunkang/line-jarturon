@@ -9,7 +9,7 @@
   <body onload="initialize();">
   
 	<table style="border: 1px solid black;width: 60%;margin: 0 auto;" class="container">
-		<tr style="text-align: center;"><td style="border: 1px solid black;"></td><td style="border: 1px solid black;">Name</td><td style="border: 1px solid black;">Date</td><td style="border: 1px solid black;">Time</td></tr>
+		<tr style="text-align: center;"><td style="border: 1px solid black;">Finish Task</td><td style="border: 1px solid black;">Important Task</td><td style="border: 1px solid black;">Name</td><td style="border: 1px solid black;">Date</td><td style="border: 1px solid black;">Time</td></tr>
 	</table>
 	
 	
@@ -43,7 +43,8 @@
 	    for (let each of myJson) {
 			table = document.getElementsByClassName('container')[0]
 			newRow = `<tr>
-			<td style="border: 1px solid black;"><input type='checkbox' id='${each.name}'></td>
+			<td style="border: 1px solid black;"><input type='checkbox' name='deleteFlag' id='${each.taskId}'></td>
+			<td style="border: 1px solid black;"><input type='checkbox' name='importantFlag' id='${each.taskId}'></td>
 			<td style="border: 1px solid black;">${each.name}</td><td style="border: 1px solid black;">${each.date}</td>
 			<td style="border: 1px solid black;">${each.time}</td>
 			</tr>`;
@@ -55,17 +56,27 @@
   }
   
   function onSubmit() {
-	  const allSelectedItem = document.querySelectorAll("input[type=checkbox]:checked")
+	  const allDeleteItem = document.querySelectorAll('input[name="deleteFlag"]:checked')
 	  let allSelectedID = []
-	  for (const each of allSelectedItem) {
+	  for (const each of allDeleteItem) {
 		  allSelectedID.push(each.id)
 	  }
-	  document.getElementsByClassName('error')[0].innerHTML += JSON.stringify(allSelectedID[0])
 	  fetch('https://line-jarturon.herokuapp.com/removeTask/'+ userID, {
 	        method: "DELETE", 
 	        headers: { "Content-Type": "application/json" },
 	        body: JSON.stringify(allSelectedID)
   	  }).then(response => response.json());
+	  
+	  const allImportantItem = document.querySelectorAll('input[name="importantFlag"]:checked')
+	  let allSelectedID2 = []
+	  for (const each of allImportantItem) {
+		  allSelectedID2.push(each.id)
+	  }
+	  fetch('https://line-jarturon.herokuapp.com/markImportant/'+ userID, {
+	        method: "POST", 
+	        headers: { "Content-Type": "application/json" },
+	        body: JSON.stringify(allSelectedID2)
+  	  }).then(response => response.json())
   }
   
   

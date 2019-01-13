@@ -50,9 +50,7 @@ public class AppRest {
 	@GetMapping("/getTask")
 	public ResponseEntity<?> getTasks(@RequestParam("userId") String userId) {
 		List<Task> tasks = Application.maps.get(userId);
-		List<Task> sortedTask = new ArrayList<>();
-		Task temp;
-		
+		tasks = this.sortTask(tasks);
 //		for (int round = 0; round <= tasks.size()-2; round++) {
 //			for (int index = round+1; index <= tasks.size()-1; index++ ) {
 //				if (tasks.get(round).getImportantFlag()) {

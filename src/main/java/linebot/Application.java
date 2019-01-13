@@ -1,5 +1,7 @@
 package linebot;
 
+import java.sql.Timestamp;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -8,6 +10,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -88,6 +91,7 @@ public class Application {
 		task.setDate(dateStr);
 		task.setTime(hhStr + ":" + mmStr);
 		task.setDuedate(dueDate);
+		task.setTaskId(genTaskId());
 		
 		System.err.println("Hello, application!");
 		System.out.println("Hello, application!");
@@ -96,6 +100,12 @@ public class Application {
 		
 		return new TextMessage("Your task has been added" + "    \n\n" + "Name: " + taskStr + "    \n" + "Date: " + dateStr
 				+ "    \n" + "HH:mm : " + hhStr + ":" + mmStr + "\n\n See all task click link below. \n line://app/1613138841-EqAkLo6L");
+	}
+	
+	private String genTaskId() {
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		return timestamp.getTime() + UUID.randomUUID().toString().substring(0, 4);
+
 	}
 
 	private String getMessage(MessageEvent<TextMessageContent> e) {

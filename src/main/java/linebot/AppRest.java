@@ -36,17 +36,18 @@ public class AppRest {
 		List<Task> tasks = Application.maps.get(userId);
 		
 		if (tasks != null && tasks.size() > 0) {
-			List<Integer> deleteIndex = new ArrayList<>();
+			List<Task> deleteTask = new ArrayList<Task>();
+			
 			for (int i = 0; i<= tasks.size()-1; i++) {
 				for (Task targetTask : targetTasks) {
 					if (tasks.get(i).getTaskId().equals(targetTask.getTaskId())) {
-						deleteIndex.add(i);
+						deleteTask.add(tasks.get(i));
+						break;
 					}
 				}
 			}
-			for (int index : deleteIndex) {
-				Application.maps.get(userId).remove(index);
-			}
+			
+			Application.maps.get(userId).removeAll(deleteTask);
 		}
 	}
 	

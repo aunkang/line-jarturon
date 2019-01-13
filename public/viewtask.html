@@ -57,26 +57,27 @@
   
   function onSubmit() {
 	  const allDeleteItem = document.querySelectorAll('input[name="deleteFlag"]:checked')
+	  const allImportantItem = document.querySelectorAll('input[name="importantFlag"]:checked')
 	  let allSelectedID = []
-	  for (const each of allDeleteItem) {
+	  for (let each of allDeleteItem) {
+		  document.getElementsByClassName('error')[0].innerHtml += each.name;
 		  allSelectedID.push({taskId: each.id})
 	  }
 	  fetch('https://line-jarturon.herokuapp.com/removeTask/'+ userID, {
 	        method: "DELETE", 
 	        headers: { "Content-Type": "application/json" },
 	        body: JSON.stringify(allSelectedID)
-  	  }).then(response => {
-  		const allImportantItem = document.querySelectorAll('input[name="importantFlag"]:checked')
-	  	  let allSelectedID2 = []
-	  	  for (const each of allImportantItem) {
-	  		  allSelectedID2.push({taskId: each.id})
-	  	  }
-	  	  fetch('https://line-jarturon.herokuapp.com/markImportant/'+ userID, {
-	  	        method: "POST", 
-	  	        headers: { "Content-Type": "application/json" },
-	  	        body: JSON.stringify(allSelectedID2)
-	    	  }).then(response => fetchData(userID))
-  	  });
+  	  }).then(response =>  fetchData(userID))
+	  
+	  let allSelectedID2 = []
+  	  for (let each of allImportantItem) {
+  		  allSelectedID2.push({taskId: each.id})
+  	  }
+  	  fetch('https://line-jarturon.herokuapp.com/markImportant/'+ userID, {
+  	        method: "POST", 
+  	        headers: { "Content-Type": "application/json" },
+  	        body: JSON.stringify(allSelectedID2)
+    	  }).then(response => fetchData(userID))
   }
   
   

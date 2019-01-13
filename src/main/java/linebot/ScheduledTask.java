@@ -21,9 +21,8 @@ public class ScheduledTask {
 	 @Autowired
 	 public LineMessagingClient lineMessagingClient;
 	 
-//	@Scheduled(cron = "0 0 12 1/1 * ? *",zone = "Asia/Thailand")
-	@Scheduled(cron = "*/10 * * * * *")
-	public void pushNotification() {
+	@Scheduled(cron = "*/10 * * * * *", zone="Asia/Bangkok")
+	public void pushNotification12PM() {
 		Map<String, List<Task>> tasks = Application.maps;
 		Set<String> userIds = tasks.keySet();
 		for (String userId : userIds ) {
@@ -32,9 +31,15 @@ public class ScheduledTask {
 			for (Task targetTask : targetTasks) {
 				replyMessage += "Task Name: " + targetTask.getName() + "\n";
 			}
+			replyMessage += "See all task click link below \n line://app/1613138841-EqAkLo6L";
 			PushMessage pushMessage = new PushMessage(userId, new TextMessage(replyMessage));
 			lineMessagingClient.pushMessage(pushMessage);
 		}
 	}
+	 
+	 @Scheduled(cron = "0 0 18 1/1 * ? *", zone="Asia/Bangkok")
+		public void pushNotification6PM() {
+		 pushNotification12PM();
+		}
 
 }
